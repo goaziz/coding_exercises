@@ -9,5 +9,16 @@ class Solution:
                 return nums[i]
 
 # Time complexity: O(nlogn)
+# Space complexity O(n)
+
+# other's solution
+
+# class Solution:
+#     def findDuplicate(self, nums: List[int]) -> int:
+#         while nums[0] != nums[nums[0]]:
+#             nums[nums[0]], nums[0] = nums[0], nums[nums[0]]
+#         return nums[0]
 
 
+# Time complexity: O(n)
+# Space complexity O(1)
