@@ -14,8 +14,3 @@ class Solution:
             if abs(arr[i] - arr[i + 1]) == abs_val:
                 ans.append([arr[i], arr[i + 1]])
         return ans
-
-
-obj = Solution()
-arr = [4, 2, 1, 3]
-print(obj.minimumAbsDifference(arr))
