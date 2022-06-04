@@ -1,44 +1,48 @@
-class MyList:
-    def __init__(self):
-        self.new_list = []
-
-    def update(self, key):
-        found = False
-        for i, j in enumerate(self.new_list):
-            if key == j:
-                self.new_list[i] = key
-                found = True
-                break
-        if not found:
-            self.new_list.append(key)
-
-    def get(self, key):
-        for i in self.new_list:
-            if i == key:
-                return True
-        return False
-
-    def remove(self, key):
-        for i, j in enumerate(self.new_list):
-            if key == j:
-                del self.new_list[i]
-
-
-class MyHashSet:
-
+class MyHashMap:
     def __init__(self):
         self.space_size = 2096
-        self.hash_table = [MyList() for _ in range(self.space_size)]
+        self.hash_table = [[] for _ in range(self.space_size)]
 
     def hash_value(self, key):
         hash_key = key % self.space_size
         return hash_key
 
-    def add(self, key: int) -> None:
-        self.hash_table[self.hash_value(key)].update(key)
+    def put(self, key: int, value: int) -> None:
+        l = self.hash_table[self.hash_value(key)]
+        found = False
+        for i, j in enumerate(l):
+            k, val = j
 
-    def remove(self, key: int) -> None:
-        self.hash_table[self.hash_value(key)].remove(key)
+            if k == key:
+                found = True
+                break
+        if found:
+            l[i] = (key, value)
+        else:
+            l.append((key, value))
 
-    def contains(self, key: int) -> bool:
-        return self.hash_table[self.hash_value(key)].get(key)
+    def remove(self, key):
+        hash_list = self.hash_table[self.hash_value(key)]
+        found = False
+        for i, j in enumerate(hash_list):
+            k, val = j
+
+            if k == key:
+                found = True
+                break
+        if found:
+            del hash_list[i]
+
+    def get(self, key):
+        hash_list = self.hash_table[self.hash_value(key)]
+        found = False
+        for i, j in enumerate(hash_list):
+            k, val = j
+
+            if k == key:
+                found = True
+                break
+        if found:
+            return val
+        else:
+            return -1
